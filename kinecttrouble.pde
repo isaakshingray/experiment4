@@ -31,8 +31,11 @@ void setup() {
   trackColor = color(255, 0, 0);
  
 }
+
 void captureEvent(Capture video){
   video.read();
+  
+  
 }
 
 void draw() {  
@@ -53,16 +56,16 @@ void draw() {
  
     threshold = 50;
 
-  float colx = 0;
-  float coly = 0;
-  int count = 0;
+  float colx=0;
+  float coly=0;
+  int count=0;
 
 
-  for (int x = 0; x < video.width; x++ ) {
-    for (int y = 0; y < video.height; y++ ) {
-      int loc = x + y * video.width;
-      // What is current color
-      color currentColor = video.pixels[loc];
+  for (int x= 0;x<video.width;x++) {
+   
+    for (int y=0;y<video.height;y++) {
+  int loc=x+y*video.width;
+   color currentColor = video.pixels[loc];
       float r1 = red(currentColor);
       float g1 = green(currentColor);
       float b1 = blue(currentColor);
@@ -71,17 +74,17 @@ void draw() {
       float b2 = blue(trackColor);
 
       float d = distSq(r1, g1, b1, r2, g2, b2); 
-
       if (d < threshold*threshold) {
-        //stroke(255);
-        //strokeWeight(1);
-        //point(x, y);
+
         colx += x;
+        
+        
         coly += y;
    
         count++;
-      }
     }
+    
+  }
   }
 
 
@@ -89,13 +92,10 @@ void draw() {
     colx = colx / count;
     coly = coly / count;
     
-    //fill(255);
-    //strokeWeight(4.0);
-    //stroke(0);
-    //ellipse(colx, coly, 1,1);
-   
+  
   if(val<1){
-     stroke(255);
+     
+    stroke(255);
       strokeWeight(1);
        ellipse(colx,coly,2,2);
     //background(255);
@@ -105,6 +105,7 @@ void draw() {
   
      C[0]=colx;
      R[0]=coly;
+ 
   //println(C[0]);
   }}
 
